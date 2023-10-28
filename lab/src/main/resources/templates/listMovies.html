@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Movie Ticket Order page - Welcome and choose a Movie</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        input[type="radio"] {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Movie Ticket Shop App</h1>
+</header>
+<main>
+    <form th:action="@{/movies/search}" method="get">
+        <label for="searchParam">Search Text:</label>
+        <input type="text" id="searchParam" name="searchParam" th:value="${searchParam}"><br>
+
+        <label for="minRating">Minimum Rating:</label>
+        <input type="number" id="minRating" name="minRating" th:value="${minRating}" min="1" max="10"><br>
+
+        <button type="submit">Search</button>
+    </form>
+    <h2>Choose movie:</h2>
+    <form th:action="@{/ticket-order}" method="get">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Summary</th>
+            <th>Rating</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.title}">Movie Title</td>
+            <td th:text="${movie.summary}">Movie Summary</td>
+            <td th:text="${movie.rating}">0.0</td>
+            <td>
+                <input type="radio" th:name="selectedMovie" th:value="${movie.title}" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        <br>
+    <h2 style="padding: 0%; margin: 0%;">User Name:</h2>
+        <input type="text" name="userName" style="margin: 1% 0% 1% 0%"><br/>
+    <h2>Choose number of tickets:</h2>
+    <input type="number" name="numTickets" min="1" max="10"><br/>
+    <br/>
+    <input type="submit" value="Submit">
+    </form>
+
+</main>
+</body>
+</html>
