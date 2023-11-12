@@ -26,4 +26,15 @@ public class MovieService implements IMovieService {
     public List<Movie> searchMovies(String text, double rating) {
         return this.movieRepository.searchMovies(text, rating);
     }
+
+    @Override
+    public void deleteById(Long id){
+        this.movieRepository.delete(id);
+    }
+
+    @Override
+    public Movie addMovie(String title, String summary, Double rating, Long productionId) {
+        return this.movieRepository.add(title, summary, rating, productionId);
+    }
+
 }

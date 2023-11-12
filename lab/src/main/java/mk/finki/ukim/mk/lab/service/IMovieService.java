@@ -6,4 +6,8 @@ import java.util.List;
 public interface IMovieService {
     List<Movie> listAll();
     List<Movie> searchMovies(String text, double rating);
+
+    void deleteById(Long id);
+
+    Movie addMovie(String title, String summary, Double rating, Long productionId);
 }

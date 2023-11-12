@@ -5,6 +5,8 @@ import mk.finki.ukim.mk.lab.repository.TickerOrderRepository;
 import mk.finki.ukim.mk.lab.service.ITickerOrderService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class TicketOrderService implements ITickerOrderService {
@@ -21,4 +23,11 @@ public class TicketOrderService implements ITickerOrderService {
         System.out.println(order.toString());
         return order;
     }
+
+    @Override
+    public List<TicketOrder> allOrders() {
+        return this.orderRepository.getAllOrders();
+    }
+
+
 }
