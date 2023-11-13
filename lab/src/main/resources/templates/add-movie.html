@@ -19,23 +19,24 @@
 <a class="btn btn-sm btn-info text-white" th:href="@{/movies}">Home Page</a>
 <div class="container">
     <form th:action="@{/movies/add}" method="post">
-
+        <input type="hidden" name="movieId" th:value="(${movie} != null ? ${movie.getId()} : '')">
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="title" required />
+            <input type="text" class="form-control" id="title" name="title" th:value="(${movie} != null ? ${movie.getTitle()} : '')" required />
         </div>
         <div class="form-group">
             <label for="summary">Summary:</label>
-            <textarea class="form-control" id="summary" name="summary" required></textarea>
+            <textarea class="form-control" id="summary" name="summary" th:text="(${movie} != null ? ${movie.getSummary()} : '')" required></textarea>
         </div>
         <div class="form-group">
             <label for="rating">Rating:</label>
-            <input type="number" class="form-control" id="rating" name="rating" step="0.1" required />
+            <input type="number" class="form-control" id="rating" name="rating" step="0.1" th:value="(${movie} != null ? ${movie.getRating()} : '')" required />
         </div>
         <div class="form-group">
             <label for="production">Production:</label>
             <select class="form-control" id="production" name="production" required>
-                <option th:each="production : ${productions}" th:value="${production.id}" th:text="${production.name}"></option>
+                <option th:each="production : ${productions}" th:value="${production.id}" th:text="${production.name}"
+                        th:selected="${movie != null && movie.production != null && movie.production.id == production.id}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>

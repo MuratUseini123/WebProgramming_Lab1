@@ -6,6 +6,7 @@ import mk.finki.ukim.mk.lab.service.IMovieService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService implements IMovieService {
@@ -33,8 +34,13 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public Movie addMovie(String title, String summary, Double rating, Long productionId) {
-        return this.movieRepository.add(title, summary, rating, productionId);
+    public Movie addMovie(Long movieId,String title, String summary, Double rating, Long productionId) {
+        return this.movieRepository.save(movieId,title, summary, rating, productionId);
+    }
+
+    @Override
+    public Optional<Movie> findMovieById(Long id) {
+        return this.movieRepository.findById(id);
     }
 
 }

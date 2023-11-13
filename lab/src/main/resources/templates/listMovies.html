@@ -42,6 +42,10 @@
 <body>
 <header>
     <h1>Welcome to our Movie Ticket Shop App</h1>
+    <th:block th:if="${hasError}">
+        <div th:text="${error}" class="text-danger"></div>
+    </th:block>
+
 </header>
 <main>
     <div>
@@ -76,7 +80,7 @@
                     <td style="width: 30%;">
                         <label for="selectedMovieId">Select: </label>
                         <input id="selectedMovieId" type="radio" th:name="selectedMovie" th:value="${movie.title}" />
-                        <a th:href="@{'/movies/edit/' + ${movie.id}}"
+                        <a th:href="@{'/movies/edit-form/' + ${movie.id}}"
                            class="btn btn-sm btn-info">
                             Edit
                         </a>

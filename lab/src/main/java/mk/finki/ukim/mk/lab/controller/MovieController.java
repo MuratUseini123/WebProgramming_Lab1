@@ -56,13 +56,27 @@ public class MovieController {
         return "add-movie";
     }
 
+
+    @GetMapping("/edit-form/{id}")
+    public String editMoviePage(@PathVariable Long id, Model model) {
+        if (this.movieService.findMovieById(id).isPresent()) {
+            Movie movie = this.movieService.findMovieById(id).get();
+            List<Production> productions = this.productionService.findAll();
+            model.addAttribute("productions", productions);
+            model.addAttribute("movie", movie);
+            return "add-movie";
+        }
+        return "redirect:/movies?error=MovieNotFound";
+    }
+
+
     @PostMapping("/add")
     public String addMovie(@RequestParam String title,
                          @RequestParam String summary,
                          @RequestParam Double rating,
-                         @RequestParam Long production){
-
-        this.movieService.addMovie(title, summary, rating, production);
+                         @RequestParam Long production,
+                         @RequestParam(required = false) Long movieId){
+        this.movieService.addMovie(movieId,title, summary, rating, production);
         return "redirect:/movies";
     }
 
